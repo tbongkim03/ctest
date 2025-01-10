@@ -15,3 +15,5 @@
 ## 참고 레포지토리
 
 - [python-for-coding-test](https://github.com/ndb796/python-for-coding-test)
+
+![LGTM](https://i.lgtm.fun/2v6c.gif)
