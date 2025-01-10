@@ -45,13 +45,17 @@ n, m = map(int, input().split())
 # 큰 숫자 초기화
 result = 0
 # 행의 개수만큼의 길이를 가진 배열 생성
-card_list = [0 for i in range(n)]
+# card_list = [0 for i in range(n)]
 # 행의 개수 만큼 반복하며 배열을 입력받음
-for idx in range(len(card_list)):
-    card_list[idx] = list(map(int, input().split()))
+#for idx in range(len(card_list)):
+for i in range(n):
+    #card_list[idx] = list(map(int, input().split()))
+    data = list(map(int, input().split()))
     # 오름차순으로 정렬해서 변수에 담음
-    card_list[idx].sort()
+    #card_list[idx].sort()
+    min_num = min(data)
     # 큰 수 비교를 통해 result에 값 저장
-    if result < card_list[idx][0]:
-        result = card_list[idx][0]
+    #if result < card_list[idx][0]:
+    #    result = card_list[idx][0]
+    result = max(result, min_num)
 print(result)
