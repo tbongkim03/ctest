@@ -62,4 +62,24 @@ for tour in tour_list:
             continue
         me[0] += 1
 
+"""
+dy, dx를 이용하여 문제 해결하기
+
+dx = [0,0,-1,1]
+dy = [-1,1,0,0]
+move_types = ["L","R","U","D"]
+
+for plan in tour_list:
+    # 이동 후 좌표 구하기
+    for i in range(len(move_types)):
+        if plan == move_types[i]:
+            nx = me[1] + dx[i]
+            ny = me[0] + dy[i]
+    # 공간을 벗어나는 경우 무시
+    if nx < 1 or ny < 1 or nx > n or ny > n:
+        continue
+    x, y = nx, ny
+print(x, y)
+"""
+
 print(' '.join(map(str, me)))
