@@ -35,13 +35,15 @@ col = ord(xy[0]) - ord('a') + 1 # 1에서 8로 수치를 맞춰주기
 row = int(xy[1]) # 1~8까지 올 수 있음
 
 # 이동할 수 있는 방향 리스트
-# col, row순
+# col, row순 -> row, col 순이 맞다.
 d = [(-2,-1), (-2,1), (-1,-2), (-1,2), (1,-2), (1,2), (2,-1), (2,1)]
 result = 0
 
 for way in d:
-    new_col = col + way[0]
-    new_row = row + way[1]
+    #new_col = col + way[0]
+    #new_row = row + way[1]
+    new_col = col + way[1]
+    new_row = row + way[0]
     if new_col >= 1 and new_col <= 8 and new_row >= 1 and new_row <= 8:
         result += 1
 print(result)
