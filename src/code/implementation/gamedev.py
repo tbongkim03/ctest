@@ -50,10 +50,12 @@
 # 1. 현재 위치에서 현재 방향을 기준으로 왼쪽 방향부터 차례대로 갈 곳을 정하는 함수
 def set_direction():
     global char_d, char_y, char_x
-    yxW = [char_y, char_x-1]
-    yxN = [char_y-1, char_x]
-    yxE = [char_y, char_x+1]
-    yxS = [char_y+1, char_x]
+    global n, m
+    # 맵의 외곽을 벗어나면 README.md 참조 // list out of range error
+    yxW = [char_y, char_x-1] if 0 <= char_x-1 else [char_y, char_x]
+    yxN = [char_y-1, char_x] if 0 <= char_y-1 else [char_y, char_x]
+    yxE = [char_y, char_x+1] if char_x+1 <= m-1 else [char_y, char_x]
+    yxS = [char_y+1, char_x] if char_y+1 <= n-1 else [char_y, char_x]
     # 0 : 3 > 2 > 1 > 0 서쪽부터
     if char_d == 0:
         directions = [3,2,1,0]
@@ -74,6 +76,7 @@ def set_direction():
 # 가본 칸이면, 회전만 수행, 1번을 다시 실행 == 다음 회전으로 하라는 말 [1,0,0,1] 이면 1에서 가본거니 0나올때 회전, 전진
 def rotAndgo():
     global char_y, char_x, char_d, directions, yx, map_data
+    global n, m
     # 회전 리스트순서대로 회전하면서 이동했을때 좌표 구해보기
     cnt = 0
     for d in directions:
@@ -86,23 +89,28 @@ def rotAndgo():
             ny, nx = yx[2][0], yx[2][1]
         else:        # 남쪽부터
             ny, nx = yx[3][0], yx[3][1]
-        
-        # 바다이면, 가본칸이면
-        if map_data[ny][nx] == 1 or map_data[ny][nx] == 2:
-            cnt +=1
-            continue
+       
+        # 맵의 외곽을 벗어나면 README.md 참조 // list out of range error
+        if 0 <= ny <= n-1 and 0 <= nx <= m-1:
+            # 바다이면, 가본칸이면
+            if map_data[ny][nx] == 1 or map_data[ny][nx] == 2:
+                cnt +=1
+                continue
+            else:
+                # 가보지 않은 칸이면 이동 후 2로 바꾸기
+                map_data[char_y][char_x] = 2
+                char_y, char_x = ny, nx
+                map_data[char_y][char_x] = 2
         else:
-            # 가보지 않은 칸이면 이동 후 2로 바꾸기
-            map_data[char_y][char_x] = 2
-            char_y, char_x = ny, nx
-            map_data[char_y][char_x] = 2
-    
+            cnt += 1
     # 모든 방향을 다 했는데 바다 or 가본칸
     if cnt == 4:
         backd = back()
-        #print(backd)
         backy, backx = map(int, backd)
-        if map_data[backy][backx] == 1:
+        # 뒤도 가본경우는 문제의 조건에 없지만,
+        # 이것을 넣지 않으면 맵 외곽이 바다로 이루어 지지 않은 경우를
+        # 해결할 수 없어서 넣었다.
+        if map_data[backy][backx] == 1 or map_data[backy][backx] == 2:
             return 0
     return 1
 # 3. 만약 모두 가본 칸이거나 바다로 되어 있는 칸 = 바라보는 방향은 유지, 뒤로 한칸 이동
@@ -112,6 +120,7 @@ def back():
     # 캐릭터가 0일때, 1일때, 2일때, 3일떄 그 시계반대방향 이동 좌표
     # yx = [yxW서, yxN북, yxE동, yxS남]
     _, yx = set_direction()
+    #print(char_d)
     if char_d == 0:
         backd = yx[3]
     elif char_d == 1:
@@ -140,5 +149,5 @@ while True:
     if rot == 0:
         break
 print(result)
-#for i in map_data:
-#    print(i)
+for i in map_data:
+    print(i)

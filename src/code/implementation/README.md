@@ -85,6 +85,8 @@ $ python gamedev.py
 1 0 0 1   # 둘째 줄은 1은 바다, 0은 육지로 이루어져있음
 1 1 0 1   # 셋째 줄은 1은 바다, 0은 육지로 이루어져있음
 1 1 1 1   # 넷째 줄은 1, 바다로 이루어져있음
+
+3
 ```
 
 문제가 길어지고, 반드시 풀고싶다는 생각에 3시간 30분정도 걸려서 풀어냈다.<br>
@@ -108,4 +110,27 @@ def turn_left():
     if direction == -1:
         direction = 3
 ```
+
+- 여기서 잠깐 ; 입력값을 다음처럼 넣었더니 에러가 나는 이유가 뭘까?
+```python
+$ python gamedev.py
+3 3
+1 1 0
+1 1 1
+1 0 0
+1 1 0
+Traceback (most recent call last):
+  File "/home/michael/ctest/src/code/implementation/gamedev.py", line 134, in <module>
+    rot = rotAndgo()
+          ^^^^^^^^^^
+  File "/home/michael/ctest/src/code/implementation/gamedev.py", line 91, in rotAndgo
+    if map_data[ny][nx] == 1 or map_data[ny][nx] == 2:
+       ~~~~~~~~~~~~^^^^
+IndexError: list index out of range
+```
+입력 조건 3번을 보면, '맵의 외곽은 항상 바다로 되어있다.' 가 있는데, <br>
+그 부분이 지금의 입력예시에서는 고려되지 않아 오류가 발생한 것이다. <br>
+map_data[ny][nx] 값의 ny, nx가 리스트의 범위보다 큰 값이 있을때 에러를 처리하지 못하고 에러가 난것이다.<br>
+하지만 코딩 테스트에서는 입력 조건을 지키는 input값만 있기 때문에 예외처리를 고려하지 않고 개발해도 지장이 없다고 한다.
+
 
