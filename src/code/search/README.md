@@ -91,3 +91,16 @@ $ python stackexample.py
 append()와 pop() 메서드를 이용하면 스택 자료구조와 동일하게 동작한다.<br>
 append()는 리스트의 가장 뒤쪽에 데이터를 삽입하고,<br>
 pop()은 리스트의 가장 뒤쪽의 데이터를 꺼낸다.<br>
+
+### 5-2 queueexample.py
+
+- 큐 예제, 파이썬에서 큐를 이용할 때에는 기본 라이브러리인 collections의 deque 객체를 생성하여 리스트처럼 활용한다.
+```bash
+python queueexample.py
+
+[3, 7, 1, 4]
+[4, 1, 7, 3]
+```
+
+append()는 기존의 list 자료형에서 사용하던 기능과 같지만, pop()  대신 popleft()를 사용한다.
+
