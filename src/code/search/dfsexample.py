@@ -20,6 +20,20 @@ def dfs(graph, v, visited):
         if not visited[i]:
             dfs(graph,i,visited)
 
+def dfs_stack(graph, start, visited):
+    # 탐색 시작 노드를 스택에 삽입하고 방문 처리를 한다.
+    stack = [start]
+    while stack:
+        # 스택의 최상단 노드에 방문하지 않은 인접 노드가 있으면 그 인접 노드를 스택에 넣고 방문 처리를 한다.
+        # 방문하지 않은 인접 노드가 없으면 스택에서 최상단 노드를 꺼낸다.
+        v = stack.pop()
+        # false 일 때
+        if not visited[v]:
+            print(v, end=' ')
+            # 방문 처리를 하고
+            visited[v] = True
+            # 인접 노드를 스택에 넣기 // 중요한 점 : 스택은 나중에 들어온게 먼저 나가는 구조이기에 여러개 한번에 넣을때는 거꾸로 넣어줘야 원래 순서대로 나간다.
+            stack.extend(reversed(graph[v]))
 # graph의 노드는 1~8로, 0번은 빈 9개의 인덱스
 graph = [
         [],
@@ -37,5 +51,10 @@ graph = [
 visited = [False] * 9
 
 # 호출
+print("재귀를 이용한 dfs")
 dfs(graph, 1, visited)
+
+print("\n스택을 이용한 dfs")
+visited = [False] * 9
+dfs_stack(graph, 1, visited)
 
