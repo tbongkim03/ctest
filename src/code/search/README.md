@@ -147,7 +147,7 @@ $ python recursivefunctionbreak.py
 - 팩토리얼을 구현하기 위해 반복문, 재귀함수 둘 다 사용해 볼 수 있어서 좋았다.
 
 ```bash
-python factorial.py
+$ python factorial.py
 input n!(factorial) : 5!
 
 반복문을 사용해서 얻은 팩토리얼:  120
@@ -165,3 +165,18 @@ f(4) = 4 \* f(3) = 4 \* 6 = 24,
 f(5) = 5 \* f(4) = 5 \* 24 = 120
 
 이렇게 계산 된다.
+
+### 5-8 dfsexample.py
+
+- dfs를 재귀함수로 구현한 예제 코드이다.
+
+```bash
+$ python dfsexample.py
+
+1 2 7 6 8 3 4 5 %
+```
+
+노드의 탐색 순서를 자료구조상 스택을 활용해서 저장하는 방식이 아니라,<br>
+재귀함수(함수 호출 스택 Call Stack)를 이용하기 때문에 간결하게 코드가 구성된다.<br>
+재귀함수 대신, 명시적으로 스택을 구현해서 코드를 짠다면 스택 오버플로우 에러를 피할 수 있다고 한다.<br>
+
